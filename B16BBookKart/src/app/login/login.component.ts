@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { RouteGuradService } from '../shared/route-gurad.service';
 
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,6 +15,7 @@ export class LoginComponent implements OnInit {
 
   myName:any;
   myPassword:any;
+  errorMsg:any;
 
   constructor(private route: Router, private service:RouteGuradService) { }
   
@@ -38,7 +40,7 @@ export class LoginComponent implements OnInit {
     "userTypeId": 1
   }
 
- this.service.logIn(body).subscribe(Response=> {
+ this.service.logIn(body).subscribe((Response: any)=> {
    let res:any =Response
   //  console.log(Response)
    
@@ -48,7 +50,8 @@ export class LoginComponent implements OnInit {
     this.route.navigate(['success'])
     
    
- }, (error=> console.log(error))
+ }, ((error: any)=> this.errorMsg=error)
+ 
  )
   
 }
